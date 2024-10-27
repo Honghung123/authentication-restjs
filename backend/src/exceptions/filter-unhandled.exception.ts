@@ -4,8 +4,10 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
+  BadRequestException,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
+import { MongooseError } from 'mongoose';
 
 /**
  * @CatchEverythingFilter
@@ -17,24 +19,40 @@ import { HttpAdapterHost } from '@nestjs/core';
 export class CatchEverythingFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
+  getHttpStatus = (ex: unknown) => {
+    if (ex instanceof HttpException) {
+      return ex.getStatus();
+    }
+    if (ex instanceof MongooseError) {
+      return HttpStatus.BAD_REQUEST;
+    }
+    return HttpStatus.INTERNAL_SERVER_ERROR;
+  };
+
+  getMessage = (ex: unknown) => {
+    if (ex instanceof HttpException) {
+      const responses = new Object(ex.getResponse());
+      if (typeof responses['message'] === 'string') {
+        return responses['message'];
+      }
+      return responses['message'][0];
+    }
+    if (ex instanceof Error) {
+      return ex.message;
+    }
+    return 'Internal server error';
+  };
+
   catch(exception: unknown, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
     const ctx = host.switchToHttp();
-    const httpStatus =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
-    let message =
-      exception instanceof HttpException
-        ? exception.getResponse()
-        : 'Internal server error';
-    message = exception instanceof Error ? exception.message : message;
+    const httpStatus = this.getHttpStatus(exception);
 
     const responseBody = {
       statusCode: httpStatus,
       timestamp: new Date().toISOString(),
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
-      message: message,
+      message: this.getMessage(exception),
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);

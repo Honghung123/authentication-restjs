@@ -2,6 +2,8 @@ import {
   BadRequestException,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Injectable,
   Patch,
   Post,
@@ -44,7 +46,14 @@ export class UsersService {
       ...createUserDto,
       password: hashPassword,
     });
-    return createUser.save();
+    try {
+      return await createUser.save();
+    } catch (error) {
+      throw new HttpException(
+        'Failed to create a new user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async findAll(): Promise<User[]> {

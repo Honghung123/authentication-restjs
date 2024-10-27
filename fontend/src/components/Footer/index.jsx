@@ -81,25 +81,25 @@ export default function Footer() {
                 <div className="flex p-3 m-auto border-t flex-col max-w-screen-lg items-center">
                     <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex gap-3">
                         <a href="/#" className="flex justify-center items-center">
-                            <button class="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#317df6] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                            <button className="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#317df6] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                                 <FacebookIcon />
-                                <span class="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
+                                <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
                                     Facebook
                                 </span>
                             </button>
                         </a>
                         <a href="/#" className="flex justify-center items-center">
-                            <button class="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#f6318a] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                            <button className="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#f6318a] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                                 <InstagramIcon />
-                                <span class="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
+                                <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
                                     Instagram
                                 </span>
                             </button>
                         </a>
                         <a href="/#" className="flex justify-center items-center">
-                            <button class="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#31c5f6] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                            <button className="group flex justify-center p-[.1rem] rounded-md drop-shadow-xl from-gray-800 bg-[#31c5f6] text-white font-semibold hover:translate-y-1 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                                 <TwitterIcon />
-                                <span class="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
+                                <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-white group-hover:text-sm group-hover:-translate-y-7 duration-500">
                                     Facebook
                                 </span>
                             </button>

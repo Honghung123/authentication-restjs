@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,6 +15,8 @@ import Toaster from "../../components/Toaster";
 import axios from "axios";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL ?? `http://localhost:8081`;
 
 export default function RegisterPage(props) {
     const [emailError, setEmailError] = useState(false);
@@ -49,7 +48,7 @@ export default function RegisterPage(props) {
             return false;
         } else {
             try {
-                const response = await axios.get(`http://localhost:8080/users/get-email?email=${email.value}`);
+                const response = await axios.get(`${BASE_URL}/user/get-email?email=${email.value}`);
                 setEmailError(true);
                 setEmailErrorMessage("Email already exists.");
                 setDisable(false);
@@ -69,7 +68,7 @@ export default function RegisterPage(props) {
             return false;
         } else {
             try {
-                const response = await axios.get(`http://localhost:8080/users/get-username?username=${username.value}`);
+                const response = await axios.get(`${BASE_URL}/user/get-username?username=${username.value}`);
                 setUsernameError(true);
                 setUsernameErrorMessage("Username already exists.");
                 setDisable(false);
@@ -103,7 +102,7 @@ export default function RegisterPage(props) {
             username: data.get("username"),
             password: data.get("password"),
         };
-        const response = await axios.post("http://localhost:8080/auth/register", payload);
+        const response = await axios.post(`${BASE_URL}/user/register`, payload);
         if (response.status === 201) {
             setToaster({
                 ...toaster,

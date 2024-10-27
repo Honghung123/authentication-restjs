@@ -91,8 +91,8 @@ export default function AccountMenu({ children, title }) {
                     </ListItemIcon>
                     <span className="hover:text-sky-400">Settings</span>
                 </MenuItem>
-                <MenuItem>
-                    <div onClick={handleLogout} className="hover:text-sky-400 flex items-center">
+                <MenuItem onClick={handleLogout} className="hover:text-sky-400">
+                    <div className="flex items-center">
                         <ListItemIcon>
                             <Logout fontSize="small" />
                         </ListItemIcon>

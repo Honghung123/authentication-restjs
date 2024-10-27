@@ -1,7 +1,5 @@
 import * as bcrypt from 'bcrypt';
 
-const saltOrRounds = 10;
-
 export const comparePassword = async (
   password: string,
   hashPassword: string,
@@ -10,5 +8,8 @@ export const comparePassword = async (
 };
 
 export const encryptPassword = async (password: string) => {
-  return await bcrypt.hash(password, saltOrRounds);
+  return await bcrypt.hash(
+    password,
+    parseInt(process.env.SALT_OR_ROUNDS) ?? 10,
+  );
 };

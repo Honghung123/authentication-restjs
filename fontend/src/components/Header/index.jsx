@@ -25,7 +25,6 @@ export default function Header() {
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
-            console.log(user);
             setUser(JSON.parse(user));
         }
     }, []);

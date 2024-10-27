@@ -32,39 +32,15 @@ export class AuthController {
     return loginDto;
   }
 
-  @Post('/register')
-  async handleRegister(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    return await this.authService.handleRegister(createUserDto);
-  }
-
-  @Get('/login/:id')
-  @Header('Content-Type', 'application/json') // Specify the header of the response
-  login(@Param('id') id: number, @Query('state') state: string): string {
-    if (state && state === 'success')
-      return `Login successfully with id: ${id}`;
-    else return 'Login failed with state: ' + state + ' because id: ' + id;
-  }
+  // @Post('/register')
+  // async handleRegister(@Body() createUserDto: CreateUserDto) {
+  //   console.log(createUserDto);
+  //   return await this.authService.handleRegister(createUserDto);
+  // }
 
   @Get('/logout')
   @Redirect('http://localhost:8080/auth/login', 200)
   logout(@Req() request: Request, @Res() response: Response) {
     console.log('Logout successfully');
-  }
-
-  @Get('/demo/1')
-  async findAll(): Promise<string> {
-    // console.log(this.authService.findAll().length);
-    return 'Hello World! ';
-  }
-
-  @Get('/demo/2')
-  findAllWithStream(): Observable<any[]> {
-    return of([]);
-  }
-
-  @Post('/request')
-  async request(@Body() loginRequest: LoginRequest): Promise<object> {
-    return {};
   }
 }

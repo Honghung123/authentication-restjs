@@ -1,28 +1,27 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { UsersModule } from './users/users.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './exceptions/filter-handled.exception';
 import { CatchEverythingFilter } from './exceptions/filter-unhandled.exception';
+import { ConfigModule } from '@nestjs/config';
 
 // Mongo db
 import { MongooseModule } from '@nestjs/mongoose';
 
-const routes: string[] = ['/auth', '/users'];
-
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://honghung123:r6AQWcO2eldAp7Yu@cluster0.ph0y1kq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-      {
-        connectionName: 'users',
-      },
-    ),
+    // Config properties from .env
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+    }),
+    // Connect to mongodb atlas, you must place this below the ConfigModule to make sure the env variables are loaded
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING, {
+      connectionName: 'users',
+    }),
     AuthModule,
     UsersModule,
   ],

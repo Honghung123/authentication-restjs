@@ -19,6 +19,9 @@ import Toaster from "../../components/Toaster";
 import axios from "axios";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL ?? `http://localhost:8081`;
+
 export default function LoginPage(props) {
     const [emailError, setEmailError] = useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
@@ -55,7 +58,7 @@ export default function LoginPage(props) {
         };
         // Call api using axios
         try {
-            const response = await axios.post("http://localhost:8080/auth/login", payload);
+            const response = await axios.post(`${BASE_URL}/auth/login`, payload);
             console.log(response.data);
             if (response.status === 200) {
                 setToaster({
