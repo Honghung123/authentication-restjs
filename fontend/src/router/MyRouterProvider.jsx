@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import DefaultLayout from "../layouts/DefaultLayout";
-
+import NotFoundPage from "../pages/NotFoundPage";
 export default function MyRouterProvider() {
     return (
         <BrowserRouter>
@@ -16,8 +16,16 @@ export default function MyRouterProvider() {
                         Layout = Fragment;
                     }
                     const Page = <Layout>{route.element}</Layout>;
-                    return <Route key={index} path={route.path} element={Page} />;
+                    return <Route exact key={index} path={route.path} element={Page} />;
                 })}
+                <Route
+                    path="*"
+                    element={
+                        <DefaultLayout>
+                            <NotFoundPage />
+                        </DefaultLayout>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );

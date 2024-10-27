@@ -2,7 +2,6 @@ import React from "react";
 // Pages - User
 import HomePage from "../pages/user/HomePage";
 import LoginPage from "../pages/LoginPage";
-import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 
 const userRoutes = [
@@ -10,7 +9,6 @@ const userRoutes = [
     {
         path: "/",
         element: <HomePage />,
-        errorElement: <NotFoundPage />,
         children: [],
     },
     {
